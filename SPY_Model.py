@@ -20,9 +20,6 @@ import warnings
 warnings.filterwarnings("ignore")
 
 SPY = pd.read_csv('/Users/samfuller/Desktop/Trading/SPY.csv', index_col=0)
-puts_concat = PolygonImport.put_dict
-put_df = pd.json_normalize(puts_concat)
-print(put_df.head())
 
 # Convert index to datetime format
 SPY.index = pd.to_datetime(SPY.index)
