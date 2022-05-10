@@ -4,7 +4,8 @@ from sklearn.svm import SVC
 # For data manipulation
 import pandas as pd
 import numpy as np
-import 'polygon-api-client' as polygon
+import polygon
+import PolygonImport
 
 from sklearn.svm import SVC
 
@@ -14,19 +15,14 @@ from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-darkgrid')
 
-from polygon import RESTClient
-
-client = RESTClient("https://api.polygon.io/v2/aggs/ticker/O:TSLA210903C00700000/range/1/"
-                    "day/2021-07-22/2021-07-22?apiKey=fVqDn5Pr_4_lo3nZk2wXI4dewA1UGlV8") # api_key is used
-
-SPY400 = client.get_aggs('SPY220520P00400000', 1, 'hour', '2022-04-01',
-                         '2022-05-08', "FALSE", 'asc', 10000)
-
 # To ignore warnings
 import warnings
 warnings.filterwarnings("ignore")
 
 SPY = pd.read_csv('/Users/samfuller/Desktop/Trading/SPY.csv', index_col=0)
+puts_concat = PolygonImport.put_dict
+put_df = pd.json_normalize(puts_concat)
+print(put_df.head())
 
 # Convert index to datetime format
 SPY.index = pd.to_datetime(SPY.index)
